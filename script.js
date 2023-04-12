@@ -1,3 +1,6 @@
+const animationScript = document.createElement('script');
+animationScript.src = 'animation.js';
+document.head.appendChild(animationScript);
 const multiplierElement = document.getElementById("multiplier");
 const betAmountElement = document.getElementById("bet-amount");
 const cashoutMultiplierElement = document.getElementById("cashout-multiplier");
@@ -16,13 +19,16 @@ placeBetButton.addEventListener("click", () => {
 
 function startGame(betAmount, cashoutMultiplier) {
   let currentMultiplier = 1;
+  
+    startCoinAnimation();
 
-  const gameInterval = setInterval(() => {
+ const gameInterval = setInterval(() => {
     currentMultiplier += 0.01;
     multiplierElement.textContent = currentMultiplier.toFixed(2) + "x";
 
     if (currentMultiplier >= cashoutMultiplier) {
       clearInterval(gameInterval);
+      stopCoinAnimation();
       alert("Congratulations! You've won!");
     }
   }, 100);
